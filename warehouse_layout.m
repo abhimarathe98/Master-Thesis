@@ -60,11 +60,27 @@ text(17.5, 5, 'Charging', 'HorizontalAlignment', 'center', 'VerticalAlignment', 
 plot(loading_x, loading_y, 'g^', 'MarkerSize', 5, 'MarkerFaceColor', 'g');
 text(75, 25, 'Loading', 'HorizontalAlignment', 'left', 'VerticalAlignment', 'top', 'FontSize', 7.5);
 
-
 % Plot the unloading stations
 plot(unloading_x, unloading_y, 'r^', 'MarkerSize', 5, 'MarkerFaceColor', 'r');
 text(25, 67.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
 text(70, 87.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
+
+% Import the robot model three times
+robots = cell(1, 3);
+for i = 1:3
+    robots{i} = importrobot('robomaster.urdf');
+end
+
+% Define the specific positions for the robots in Room 1
+robot_positions = [20, 10; 20, 15; 20, 20]; % Each row corresponds to a robot's (x, y) position
+
+% Plot the robots' positions
+for i = 1:3
+    robot_x = robot_positions(i, 1);
+    robot_y = robot_positions(i, 2);
+    plot(robot_x, robot_y, 'mo', 'MarkerSize', 10, 'MarkerFaceColor', 'm');
+    text(robot_x, robot_y, sprintf('Robot %d', i), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
+end
 
 %% 
 
@@ -243,7 +259,7 @@ plot([50 60], [100 100], 'w', 'LineWidth', 2);
 %% 
 
 % Set the axis limits and labels
-axis([0 120 0 60]);
+axis([0 200 0 200]);
 xlabel('X [meters]');
 ylabel('Y [meters]');
 title('Warehouse Layout');
