@@ -1,14 +1,11 @@
 function goal_pos = random_unloading_station(obstacles)
-    % random_unloading_station - Selects a random unloading station position
+    % random_unloading_station - Selects a valid unloading station position
     % Input: 
-    %   - obstacles: The obstacle grid
+    %   - obstacles: The obstacle map
     % Output:
-    %   - goal_pos: A valid unloading station position in free space
+    %   - goal_pos: A valid unloading station position
 
-    % Create the occupancy map from the obstacle grid
-    map = binaryOccupancyMap(obstacles, 1);  % Set grid resolution to 1
-
-    % Define possible unloading station positions (example positions)
+    % Define possible unloading station positions
     unloading_stations = [
         10, 72.5;
         25, 72.5;
@@ -37,15 +34,19 @@ function goal_pos = random_unloading_station(obstacles)
         40, 117.5;
     ];
 
-    % Keep selecting an unloading station until a free space is found
-    valid_goal = false;
-    while ~valid_goal
-        goal_pos = unloading_stations(randi(size(unloading_stations, 1)), :);
-        goal_pos_int = round(goal_pos);  % Ensure integer position for occupancy checking
-        
-        % Check if the goal position is free in the binary occupancy map
-        if ~checkOccupancy(map, [goal_pos_int(2), goal_pos_int(1)])  % MATLAB uses y, x indexing
-            valid_goal = true;  % Valid goal found
+    % Filter out unloading stations that are occupied by obstacles
+    valid_stations = [];
+    for i = 1:size(unloading_stations, 1)
+        station = round(unloading_stations(i, :));  % Round to nearest integer
+        if obstacles(station(2), station(1)) == 0  % Ensure station is not an obstacle
+            valid_stations = [valid_stations; station];
         end
+    end
+
+    % Randomly select a valid unloading station
+    if ~isempty(valid_stations)
+        goal_pos = valid_stations(randi(size(valid_stations, 1)), :);
+    else
+        error('No valid unloading stations available.');
     end
 end

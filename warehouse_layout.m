@@ -1,3 +1,5 @@
+function warehouse_layout()
+
 % Define the figure
 figure;
 hold on;
@@ -65,22 +67,6 @@ plot(unloading_x, unloading_y, 'r^', 'MarkerSize', 5, 'MarkerFaceColor', 'r');
 text(25, 67.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
 text(70, 87.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
 
-% Import the robot model three times
-robots = cell(1, 3);
-for i = 1:3
-    robots{i} = importrobot('robomaster.urdf');
-end
-
-% Define the specific positions for the robots in Room 1
-robot_positions = [20, 10; 20, 15; 20, 20]; % Each row corresponds to a robot's (x, y) position
-
-% Plot the robots' positions
-for i = 1:3
-    robot_x = robot_positions(i, 1);
-    robot_y = robot_positions(i, 2);
-    plot(robot_x, robot_y, 'mo', 'MarkerSize', 10, 'MarkerFaceColor', 'm');
-    text(robot_x, robot_y, sprintf('Robot %d', i), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
-end
 
 %% 
 
@@ -228,7 +214,7 @@ charging_x = [90, 90];
 charging_y = [190, 195];
 
 unloading_x = [10, 25, 40, 55, 10, 25, 40, 10, 25, 40];
-unloading_y = [167.5, 167.5, 167.5, 168, 142.5, 142.5, 142.5, 117.5, 117.5, 117.5];
+unloading_y = [167.5, 167.5, 167.5, 167.5, 142.5, 142.5, 142.5, 117.5, 117.5, 117.5];
 
 % Plot the charging stations
 plot(charging_x, charging_y, 'b^', 'MarkerSize', 5, 'MarkerFaceColor', 'b');
