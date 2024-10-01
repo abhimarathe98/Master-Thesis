@@ -1,4 +1,5 @@
 function obstacles = obstacle_map(grid_size)
+
     % obstacle_map - Generates a binary map of the warehouse obstacles based on the layout
     % Input:
     %   - grid_size: The size of the grid, e.g., [200, 200]

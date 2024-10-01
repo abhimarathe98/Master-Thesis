@@ -68,6 +68,20 @@ text(25, 67.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment'
 text(70, 87.5, 'Unloading', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5);
 
 
+% Define the robot start positions
+robot_positions = [15, 5; 15, 10; 15, 15; 15, 20; 15, 25];
+
+% Plot the robot start positions
+hold on;
+plot(robot_positions(:,1), robot_positions(:,2), 'mo', 'MarkerSize', 7, 'MarkerFaceColor', 'm');
+
+% Add labels for the robot positions (optional, you can remove this if not needed)
+for i = 1:size(robot_positions, 1)
+    text(robot_positions(i,1), robot_positions(i,2), sprintf('R%d', i), ...
+        'HorizontalAlignment', 'right', 'VerticalAlignment', 'top', 'FontSize', 7);
+end
+ 
+
 %% 
 
 %%%%% ROOM 2 LAYOUT %%%%%
@@ -242,6 +256,21 @@ plot([100 100], [150 160], 'w', 'LineWidth', 2);
 
 % Door between Room 4 and Room 1
 plot([50 60], [100 100], 'w', 'LineWidth', 2);
+
+%%
+
+% Plot the access points (APs)
+ap_positions = [
+    50, 50;    % AP1 in Room 1
+    150, 50;   % AP2 in Room 2
+    150, 150;  % AP3 in Room 3
+    50, 150;   % AP4 in Room 4
+];
+
+for i = 1:size(ap_positions, 1)
+    plot(ap_positions(i, 1), ap_positions(i, 2), 'mx', 'MarkerSize', 10, 'LineWidth', 2);
+    text(ap_positions(i, 1), ap_positions(i, 2), sprintf('AP%d', i), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', 'FontSize', 7.5, 'Color', 'magenta');
+end
 %% 
 
 % Set the axis limits and labels
